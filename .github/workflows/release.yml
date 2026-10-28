@@ -1,0 +1,94 @@
+name: Release
+
+# When you create a GitHub Release (or push a v* tag), this workflow:
+# 1) builds the web SPA
+# 2) packs source + web dist + checksums
+# 3) uploads assets to that Release
+
+on:
+  release:
+    types: [published]
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve version
+        id: ver
+        run: |
+          if [ "${{ github.event_name }}" = "release" ]; then
+            VERSION="${{ github.event.release.tag_name }}"
+          else
+            VERSION="${GITHUB_REF_NAME}"
+          fi
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "Building assets for ${VERSION}"
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: apps/web/package-lock.json
+
+      - name: Build web (SPA)
+        working-directory: apps/web
+        run: |
+          npm ci || npm install
+          npm run build
+          test -d dist
+
+      - name: Pack release artifacts
+        run: |
+          set -euo pipefail
+          VERSION="${{ steps.ver.outputs.version }}"
+          OUT="release-assets"
+          mkdir -p "$OUT"
+
+          git archive --format=tar.gz --prefix="vrav-tube-engine-${VERSION}/" -o "$OUT/vrav-tube-engine-${VERSION}-source.tar.gz" HEAD
+
+          (cd apps/web/dist && zip -r -q "../../../$OUT/vrav-tube-engine-${VERSION}-web-dist.zip" .)
+
+          mkdir -p /tmp/vrav-deploy/deploy /tmp/vrav-deploy/docs /tmp/vrav-deploy/scripts
+          cp docker-compose.yml docker-compose.prod.yml .env.example /tmp/vrav-deploy/ 2>/dev/null || true
+          cp -r deploy/* /tmp/vrav-deploy/deploy/ 2>/dev/null || true
+          cp docs/DEPLOYMENT_VDS.md docs/RELEASE_NOTES_v0.1.0-beta.md docs/PRODUCTION_READINESS.md /tmp/vrav-deploy/docs/ 2>/dev/null || true
+          cp scripts/go_live.sh scripts/e2e_smoke.sh /tmp/vrav-deploy/scripts/ 2>/dev/null || true
+          cp README.md CHANGELOG.md LICENSE COMMERCIAL_LICENSE.md /tmp/vrav-deploy/ 2>/dev/null || true
+          (cd /tmp/vrav-deploy && zip -r -q "$GITHUB_WORKSPACE/$OUT/vrav-tube-engine-${VERSION}-deploy-bundle.zip" .)
+
+          (
+            cd "$OUT"
+            sha256sum *.tar.gz *.zip > "SHA256SUMS-${VERSION}.txt"
+          )
+
+          ls -lah "$OUT"
+          cat "$OUT/SHA256SUMS-${VERSION}.txt"
+
+      - name: Publish / update GitHub Release assets
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.ver.outputs.version }}
+          name: VRAV Tube Engine ${{ steps.ver.outputs.version }}
+          draft: false
+          prerelease: ${{ contains(steps.ver.outputs.version, 'beta') || contains(steps.ver.outputs.version, 'alpha') || contains(steps.ver.outputs.version, 'rc') }}
+          generate_release_notes: true
+          fail_on_unmatched_files: true
+          files: |
+            release-assets/vrav-tube-engine-*-source.tar.gz
+            release-assets/vrav-tube-engine-*-web-dist.zip
+            release-assets/vrav-tube-engine-*-deploy-bundle.zip
+            release-assets/SHA256SUMS-*.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
