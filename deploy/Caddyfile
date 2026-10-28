@@ -1,0 +1,33 @@
+# Caddy automatic HTTPS for VRAV Tube Engine
+# Replace app.example.com with your domain.
+
+app.example.com {
+	encode gzip
+
+	handle /api/* {
+		reverse_proxy 127.0.0.1:8000
+	}
+
+	handle /docs* {
+		reverse_proxy 127.0.0.1:8000
+	}
+	handle /openapi.json {
+		reverse_proxy 127.0.0.1:8000
+	}
+
+	handle {
+		root * /var/www/vrav/web
+		try_files {path} /index.html
+		file_server
+	}
+
+	header {
+		X-Content-Type-Options nosniff
+		X-Frame-Options DENY
+		Referrer-Policy strict-origin-when-cross-origin
+	}
+
+	request_body {
+		max_size 50MB
+	}
+}
