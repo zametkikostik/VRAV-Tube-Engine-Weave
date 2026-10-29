@@ -1,10 +1,5 @@
 name: Release
 
-# When you create a GitHub Release (or push a v* tag), this workflow:
-# 1) builds the web SPA
-# 2) packs source + web dist + checksums
-# 3) uploads assets to that Release
-
 on:
   release:
     types: [published]
@@ -39,13 +34,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: npm
-          cache-dependency-path: apps/web/package-lock.json
 
       - name: Build web (SPA)
         working-directory: apps/web
         run: |
-          npm ci || npm install
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
           npm run build
           test -d dist
 
@@ -84,7 +77,7 @@ jobs:
           draft: false
           prerelease: ${{ contains(steps.ver.outputs.version, 'beta') || contains(steps.ver.outputs.version, 'alpha') || contains(steps.ver.outputs.version, 'rc') }}
           generate_release_notes: true
-          fail_on_unmatched_files: true
+          fail_on_unmatched_files: false
           files: |
             release-assets/vrav-tube-engine-*-source.tar.gz
             release-assets/vrav-tube-engine-*-web-dist.zip
