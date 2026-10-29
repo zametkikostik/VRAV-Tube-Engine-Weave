@@ -10,6 +10,7 @@ const PLANS = [
     nameKey: "pricing.personal",
     price: "$19",
     features: ["pricing.f_audits_20", "pricing.f_html_pdf", "pricing.f_ai"],
+    highlighted: false,
   },
   {
     code: "professional",
@@ -28,9 +29,9 @@ const PLANS = [
       "pricing.f_html_pdf",
       "pricing.f_ai",
     ],
+    highlighted: false,
   },
 ] as const;
-
 
 function EnterpriseContactForm() {
   const { t, i18n } = useTranslation();
