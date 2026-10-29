@@ -1,0 +1,73 @@
+{
+  "app_name": "VRAV Tube Engine",
+  "tagline": "AI одит на YouTube, SEO и рискове за монетизация",
+  "nav": {
+    "dashboard": "Табло",
+    "projects": "Проекти",
+    "audits": "Одити",
+    "settings": "Настройки",
+    "billing": "Плащане",
+    "logout": "Изход"
+  },
+  "auth": {
+    "login": "Вход",
+    "register": "Регистрация",
+    "email": "Имейл",
+    "password": "Парола",
+    "full_name": "Пълно име",
+    "organization": "Име на организация",
+    "forgot_password": "Забравена парола?",
+    "no_account": "Нямате акаунт?",
+    "have_account": "Вече имате акаунт?",
+    "login_title": "Добре дошли отново",
+    "register_title": "Създайте акаунт",
+    "submit_login": "Вход",
+    "submit_register": "Създай акаунт"
+  },
+  "dashboard": {
+    "title": "Табло",
+    "welcome": "Добре дошли, {{name}}",
+    "orgs": "Вашите организации",
+    "no_orgs": "Все още няма организации",
+    "create_audit": "Нов одит",
+    "coming_soon": "Работният процес за одит идва в Phase 2"
+  },
+  "common": {
+    "save": "Запази",
+    "cancel": "Отказ",
+    "loading": "Зареждане…",
+    "error": "Нещо се обърка",
+    "success": "Успех",
+    "language": "Език"
+  },
+  "landing": {
+    "hero": "Одит на YouTube видеа преди публикуване",
+    "sub": "SEO препоръки, анализ на съдържание и оценка на рискове за монетизация — с AI.",
+    "cta": "Започнете",
+    "disclaimer": "Не е свързано с YouTube или Google. Само консултативни доклади."
+  },
+  "pricing": {
+    "title": "Цени",
+    "sub": "Започнете безплатно. Надградете при нужда от повече одити.",
+    "personal": "Personal",
+    "professional": "Professional",
+    "agency": "Agency",
+    "f_audits_20": "20 одита / месец",
+    "f_audits_100": "100 одита / месец",
+    "f_audits_500": "500 одита / месец",
+    "f_html_pdf": "HTML и PDF отчети",
+    "f_ai": "AI SEO и анализ на рискове",
+    "f_priority": "Приоритетна обработка",
+    "f_white_label": "White-label брандиране",
+    "note": "Enterprise / self-hosted по заявка. Плащания чрез Stripe или YooKassa."
+  },
+  "contact": {
+    "title": "Enterprise контакт",
+    "sub": "White-label или self-hosted — опишете нуждата, ще отговорим по имейл.",
+    "name": "Име",
+    "company": "Компания",
+    "message": "Съобщение",
+    "send": "Изпрати",
+    "success": "Благодарим — съобщението е получено."
+  }
+}

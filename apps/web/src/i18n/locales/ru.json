@@ -1,0 +1,73 @@
+{
+  "app_name": "VRAV Tube Engine",
+  "tagline": "AI-аудит YouTube, SEO и риски монетизации",
+  "nav": {
+    "dashboard": "Панель",
+    "projects": "Проекты",
+    "audits": "Аудиты",
+    "settings": "Настройки",
+    "billing": "Оплата",
+    "logout": "Выйти"
+  },
+  "auth": {
+    "login": "Войти",
+    "register": "Регистрация",
+    "email": "Электронная почта",
+    "password": "Пароль",
+    "full_name": "Полное имя",
+    "organization": "Название организации",
+    "forgot_password": "Забыли пароль?",
+    "no_account": "Нет аккаунта?",
+    "have_account": "Уже есть аккаунт?",
+    "login_title": "С возвращением",
+    "register_title": "Создайте аккаунт",
+    "submit_login": "Войти",
+    "submit_register": "Создать аккаунт"
+  },
+  "dashboard": {
+    "title": "Панель",
+    "welcome": "Добро пожаловать, {{name}}",
+    "orgs": "Ваши организации",
+    "no_orgs": "Организаций пока нет",
+    "create_audit": "Новый аудит",
+    "coming_soon": "Рабочий процесс аудита появится в Phase 2"
+  },
+  "common": {
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "loading": "Загрузка…",
+    "error": "Что-то пошло не так",
+    "success": "Успешно",
+    "language": "Язык"
+  },
+  "landing": {
+    "hero": "Аудит YouTube-видео до публикации",
+    "sub": "SEO-рекомендации, анализ контента и оценка рисков монетизации — на базе ИИ.",
+    "cta": "Начать",
+    "disclaimer": "Не связано с YouTube или Google. Только консультационные отчёты."
+  },
+  "pricing": {
+    "title": "Тарифы",
+    "sub": "Начните бесплатно. Перейдите на платный план, когда понадобится больше аудитов.",
+    "personal": "Personal",
+    "professional": "Professional",
+    "agency": "Agency",
+    "f_audits_20": "20 аудитов / месяц",
+    "f_audits_100": "100 аудитов / месяц",
+    "f_audits_500": "500 аудитов / месяц",
+    "f_html_pdf": "Отчёты HTML и PDF",
+    "f_ai": "AI SEO и анализ рисков",
+    "f_priority": "Приоритетная обработка",
+    "f_white_label": "White-label брендинг",
+    "note": "Enterprise / self-hosted по запросу. Оплата через Stripe или ЮKassa (при доступности)."
+  },
+  "contact": {
+    "title": "Enterprise",
+    "sub": "White-label или self-hosted — опишите задачу, ответим на email.",
+    "name": "Имя",
+    "company": "Компания",
+    "message": "Сообщение",
+    "send": "Отправить",
+    "success": "Спасибо — сообщение получено."
+  }
+}
