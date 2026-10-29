@@ -47,6 +47,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
+          # cache only when lockfile exists — see install step
       - name: Install
         run: |
           if [ -f package-lock.json ]; then
@@ -92,6 +93,7 @@ jobs:
       CELERY_BROKER_URL: redis://localhost:6379/1
       CELERY_RESULT_BACKEND: redis://localhost:6379/2
       CORS_ORIGINS: '["http://localhost:5173"]'
+      PYTHONPATH: apps/api
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -102,11 +104,16 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -e ".[dev]"
+          python -c "import psycopg; print('psycopg', psycopg.__version__)"
       - name: Migrate
         working-directory: apps/api
+        env:
+          PYTHONPATH: .
         run: alembic upgrade head
       - name: Health check
         working-directory: apps/api
+        env:
+          PYTHONPATH: .
         run: |
           uvicorn app.main:app --host 127.0.0.1 --port 8000 &
           for i in $(seq 1 30); do
