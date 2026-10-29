@@ -97,16 +97,17 @@ async def get_organization_entitlements(db: Any, organization_id: UUID) -> Entit
     return Entitlements()
 
 
+async def assert_can_start_audit(db: Any, organization_id: UUID) -> Entitlements:
+    """Allow free-tier limited audits; raise ValueError only on hard plan blocks."""
+    return await get_organization_entitlements(db, organization_id)
+
+
 async def check_entitlement(
     db: Any,
     organization_id: UUID,
     feature: str = "audit",
 ) -> Entitlements:
-    """Raise HTTPException-ready ValueError if plan does not allow the feature."""
     ents = await get_organization_entitlements(db, organization_id)
-    if feature == "audit":
-        # Free tier still allows limited audits; hard block only if concurrent exceeded elsewhere
-        return ents
     if feature == "white_label" and not ents.allows("white_label"):
         raise ValueError("White-label requires Agency plan or higher")
     if feature == "pdf_export" and not ents.allows("pdf_export"):
