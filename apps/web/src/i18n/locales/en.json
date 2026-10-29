@@ -1,0 +1,73 @@
+{
+  "app_name": "VRAV Tube Engine",
+  "tagline": "AI YouTube Audit, SEO & Monetization Risk",
+  "nav": {
+    "dashboard": "Dashboard",
+    "projects": "Projects",
+    "audits": "Audits",
+    "settings": "Settings",
+    "billing": "Billing",
+    "logout": "Log out"
+  },
+  "auth": {
+    "login": "Log in",
+    "register": "Sign up",
+    "email": "Email",
+    "password": "Password",
+    "full_name": "Full name",
+    "organization": "Organization name",
+    "forgot_password": "Forgot password?",
+    "no_account": "Don't have an account?",
+    "have_account": "Already have an account?",
+    "login_title": "Welcome back",
+    "register_title": "Create your account",
+    "submit_login": "Sign in",
+    "submit_register": "Create account"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome, {{name}}",
+    "orgs": "Your organizations",
+    "no_orgs": "No organizations yet",
+    "create_audit": "New audit",
+    "coming_soon": "Audit workflow coming in Phase 2"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "loading": "Loading…",
+    "error": "Something went wrong",
+    "success": "Success",
+    "language": "Language"
+  },
+  "landing": {
+    "hero": "Audit YouTube videos before you publish",
+    "sub": "SEO recommendations, content analysis and monetization risk awareness — powered by AI.",
+    "cta": "Get started",
+    "disclaimer": "Not affiliated with YouTube or Google. Advisory reports only."
+  },
+  "pricing": {
+    "title": "Pricing",
+    "sub": "Start free. Upgrade when you need more audits and white-label.",
+    "personal": "Personal",
+    "professional": "Professional",
+    "agency": "Agency",
+    "f_audits_20": "20 audits / month",
+    "f_audits_100": "100 audits / month",
+    "f_audits_500": "500 audits / month",
+    "f_html_pdf": "HTML & PDF reports",
+    "f_ai": "AI SEO & risk analysis",
+    "f_priority": "Priority processing",
+    "f_white_label": "White-label branding",
+    "note": "Enterprise / self-hosted available on request. Payments via Stripe or YooKassa where eligible."
+  },
+  "contact": {
+    "title": "Enterprise contact",
+    "sub": "Tell us about white-label or self-hosted needs. We will respond by email.",
+    "name": "Full name",
+    "company": "Company",
+    "message": "Message",
+    "send": "Send message",
+    "success": "Thank you — we received your message."
+  }
+}
